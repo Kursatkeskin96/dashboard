@@ -21,6 +21,26 @@ export default function Page() {
     const monthRef = useRef(null);
     const yearRef = useRef(null);
 
+    const handleFirstname = (e) => {
+      setFirstname(e.target.value)
+    }
+
+    const handleLastname = (e) => {
+      setLastname(e.target.value)
+    }
+
+    const handleConfName = (e) => {
+      setConferenceName(e.target.value)
+    }
+
+    const handleConfLocation = (e) => {
+      setConferenceLocation(e.target.value)
+    }
+
+    const handleConfDetail = (e) => {
+      setConferenceDetail(e.target.value)
+    }
+
   const handleDayInputChange = (e) => {
     const value = e.target.value;
     if (value.length <= 2) {
@@ -114,6 +134,8 @@ export default function Page() {
                 <input
                   type="text"
                   id="firstname"
+                  value={firstname}
+                  onChange={handleFirstname}
                   autoComplete="given-name"
                   required
                   placeholder="John"
@@ -130,6 +152,8 @@ export default function Page() {
                 <input
                   type="text"
                   placeholder="Doe"
+                  value={lastname}
+                  onChange={handleLastname}
                   autoComplete="family-name"
                   required
                   id="lastname"
@@ -163,6 +187,8 @@ export default function Page() {
                 <input
                   type="text"
                   placeholder="Next.js CONF24"
+                  value={conferenceName}
+                  onChange={handleConfName}
                   required
                   id="conference-name"
                   className="bg-[#31566A] text-white rounded-[7px] w-full h-[35px] text-[12px] pl-2 focus:outline-none border-[1px] border-[#32566A] focus:border-gray-300 focus:ring-0"
@@ -178,6 +204,8 @@ export default function Page() {
                 <input
                   type="text"
                   placeholder="San Francisco"
+                  value={conferenceLocation}
+                  onChange={handleConfLocation}
                   id="conference-location"
                   required
                   className="bg-[#31566A] text-white rounded-[7px] w-full h-[35px] text-[12px] pl-2 focus:outline-none border-[1px] border-[#32566A] focus:border-gray-300 focus:ring-0"
@@ -194,6 +222,8 @@ export default function Page() {
               <input
                 type="text"
                 id="conference-detail"
+                value={conferenceDetail}
+                onChange={handleConfDetail}
                 required
                 placeholder="Please type your conference detail..."
                 className="bg-[#31566A] text-white rounded-[7px] h-[35px] text-[12px] pl-2 focus:outline-none border-[1px] border-[#32566A] focus:border-gray-300 focus:ring-0"
