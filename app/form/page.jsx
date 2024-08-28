@@ -1,27 +1,110 @@
-import React from 'react'
-import stars from '@/utils/images/stars.png'
-import Image from 'next/image';
+'use client'
+import React, {useState, useRef} from "react";
+import stars from "@/utils/images/stars.webp";
+import Image from "next/image";
 
 export default function Page() {
+  const [email, setEmail] = useState('')
+  const [firstname, setFirstname] = useState('')
+  const [lastname, setLastname] = useState('')
+  const [conferenceName, setConferenceName] = useState('')
+  const [conferenceLocation, setConferenceLocation] = useState('')
+  const [conferenceDetail, setConferenceDetail] = useState('')
+  const [isEmailValid, setIsEmailValid] = useState(true)
+  const [conferenceDate, setConferenceDate] = useState({
+    day: "",
+    month: "",
+    year: "",
+  });
+
+    const dayRef = useRef(null);
+    const monthRef = useRef(null);
+    const yearRef = useRef(null);
+
+  const handleDayInputChange = (e) => {
+    const value = e.target.value;
+    if (value.length <= 2) {
+      if (value > 31) {
+        e.target.value = "";
+      } else {
+        setConferenceDate((prev) => ({ ...prev, day: value }));
+        if (value.length === 2) {
+          monthRef.current.focus();
+        }
+      }
+    } else {
+      e.target.value = value.slice(0, 2);
+    }
+  };
+
+  const handleMonthInputChange = (e) => {
+    const value = e.target.value;
+    if (value.length <= 2) {
+      if (value > 12) {
+        e.target.value = "";
+      } else {
+        setConferenceDate((prev) => ({ ...prev, month: value }));
+        if (value.length === 2) {
+          yearRef.current.focus();
+        }
+      }
+    } else {
+      e.target.value = value.slice(0, 2);
+    }
+  };
+
+  const handleYearInputChange = (e) => {
+    const value = e.target.value;
+    if (value.length <= 4) {
+      if (value > 2025){
+        e.target.value = "";
+      }
+      setConferenceDate((prev) => ({ ...prev, year: value }));
+    } else {
+      e.target.value = value.slice(0, 4);
+    }
+  };
+
+   const handleEmailChange = (e) => {
+     const value = e.target.value;
+     setEmail(value);
+     const valid = validateEmail(value);
+     setIsEmailValid(valid);
+   };
+
+   const validateEmail = (email) => {
+     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+     return re.test(String(email).toLowerCase());
+   };
+
   return (
     <div className="w-full flex justify-center items-center min-h-screen bg-[#F5F5F5]">
-      <div className="w-[900px] h-[600px] rounded-[15px] bg-[#1E323D] flex justify-center items-center">
-        <div className=" w-full h-full relative">
-          <Image src={stars} alt="stars" fill={true} className="absolute" priority />
+      <div className="w-[90%] md:w-[900px] h-auto md:h-[600px] mt-20 md:mt-0 rounded-[15px] bg-[#1E323D] flex flex-col md:flex-row justify-center items-center">
+        {/* Image container */}
+        <div className="w-full h-[300px] md:h-full md:w-1/2 relative">
+          <Image
+            src={stars}
+            alt="stars"
+            fill={true}
+            className="absolute object-cover rounded-t-[15px] md:rounded-r-none md:rounded-l-[15px]"
+            priority
+          />
           <p className="absolute text-white text-center top-[50%] w-full opacity-75">
             Expand Your Knowledge and Network Globally
           </p>
         </div>
-        <div className="w-full h-full">
-          <h1 className="text-white text-xl text-center pt-10">
+
+        {/* Form container */}
+        <div className="w-full md:w-1/2 h-full px-6 py-10 md:py-0">
+          <h1 className="text-white text-xl text-center pt-10 ">
             Conference Attendance Request
           </h1>
           <p className="text-[#b9b9b9] text-center text-[12px] pt-1">
             Please fill out all the fields accurately.
           </p>
-          <form className="w-[80%] mx-auto">
-            <div className="flex justify-center items-center gap-4 pt-10">
-              <div>
+          <form className="w-full mx-auto">
+            <div className="flex flex-col md:flex-row justify-center items-center gap-4 pt-10">
+              <div className="w-full md:w-1/2">
                 <label
                   className="text-[12px] text-[#b7b7b7]"
                   htmlFor="firstname"
@@ -32,11 +115,12 @@ export default function Page() {
                   type="text"
                   id="firstname"
                   autoComplete="given-name"
+                  required
                   placeholder="John"
-                  className="bg-[#31566A] w-full text-white rounded-[7px] h-[35px] text-[12px] pl-2"
+                  className="bg-[#31566A] w-full text-white rounded-[7px] h-[35px] text-[12px] pl-2 focus:outline-none border-[1px] border-[#32566A] focus:border-gray-300 focus:ring-0"
                 />
               </div>
-              <div>
+              <div className="w-full md:w-1/2">
                 <label
                   className="text-[12px] text-[#b7b7b7]"
                   htmlFor="lastname"
@@ -47,8 +131,9 @@ export default function Page() {
                   type="text"
                   placeholder="Doe"
                   autoComplete="family-name"
+                  required
                   id="lastname"
-                  className="bg-[#31566A] text-white rounded-[7px] w-full h-[35px] text-[12px] pl-2"
+                  className="bg-[#31566A] text-white rounded-[7px] w-full h-[35px] text-[12px] pl-2 focus:outline-none border-[1px] border-[#32566A] focus:border-gray-300 focus:ring-0"
                 />
               </div>
             </div>
@@ -59,13 +144,16 @@ export default function Page() {
               <input
                 type="text"
                 autoComplete="email"
+                required
                 id="email"
+                onChange={handleEmailChange}
+                value={email}
                 placeholder="johndoe@gmail.com"
-                className="bg-[#31566A] text-white rounded-[7px] h-[35px] text-[12px] pl-2"
+                className={`bg-[#31566A] text-white rounded-[7px] h-[35px] text-[12px] pl-2 focus:outline-none border-[1px] focus:border-gray-300 focus:ring-0 ${isEmailValid ? 'border-[#32566A]' : 'border-red-700'}`}
               />
             </div>
-            <div className="flex justify-center items-center gap-4 pt-4">
-              <div>
+            <div className="flex flex-col md:flex-row justify-center items-center gap-4 pt-4">
+              <div className="w-full md:w-1/2">
                 <label
                   className="text-[12px] text-[#b7b7b7]"
                   htmlFor="conference-name"
@@ -75,11 +163,12 @@ export default function Page() {
                 <input
                   type="text"
                   placeholder="Next.js CONF24"
+                  required
                   id="conference-name"
-                  className="bg-[#31566A] text-white rounded-[7px] w-full h-[35px] text-[12px] pl-2"
+                  className="bg-[#31566A] text-white rounded-[7px] w-full h-[35px] text-[12px] pl-2 focus:outline-none border-[1px] border-[#32566A] focus:border-gray-300 focus:ring-0"
                 />
               </div>
-              <div>
+              <div className="w-full md:w-1/2">
                 <label
                   className="text-[12px] text-[#b7b7b7]"
                   htmlFor="conference-location"
@@ -88,9 +177,10 @@ export default function Page() {
                 </label>
                 <input
                   type="text"
-                  placeholder="San"
+                  placeholder="San Francisco"
                   id="conference-location"
-                  className="bg-[#31566A] text-white rounded-[7px] w-full h-[35px] text-[12px] pl-2"
+                  required
+                  className="bg-[#31566A] text-white rounded-[7px] w-full h-[35px] text-[12px] pl-2 focus:outline-none border-[1px] border-[#32566A] focus:border-gray-300 focus:ring-0"
                 />
               </div>
             </div>
@@ -104,8 +194,9 @@ export default function Page() {
               <input
                 type="text"
                 id="conference-detail"
+                required
                 placeholder="Please type your conference detail..."
-                className="bg-[#31566A] text-white rounded-[7px] h-[35px] text-[12px] pl-2"
+                className="bg-[#31566A] text-white rounded-[7px] h-[35px] text-[12px] pl-2 focus:outline-none border-[1px] border-[#32566A] focus:border-gray-300 focus:ring-0"
               />
             </div>
             <div className="flex flex-col pt-4">
@@ -117,25 +208,37 @@ export default function Page() {
               </label>
               <div className="flex justify-center items-center gap-4">
                 <input
-                  type="text"
+                  type="number"
                   id="conference-date"
+                  inputMode="numeric"
                   placeholder="DD"
-                  className="bg-[#31566A] w-full text-white rounded-[7px] h-[35px] text-[12px] pl-2"
+                  ref={dayRef}
+                  onChange={handleDayInputChange}
+                  required
+                  className="bg-[#31566A] w-full text-white rounded-[7px] h-[35px] text-[12px] pl-2 focus:outline-none border-[1px] border-[#32566A] focus:border-gray-300 focus:ring-0"
                 />
                 <input
-                  type="text"
+                  type="number"
                   id="conference-date"
+                  inputMode="numeric"
+                  ref={monthRef}
+                  onChange={handleMonthInputChange}
                   placeholder="MM"
-                  className="bg-[#31566A] w-full text-white rounded-[7px] h-[35px] text-[12px] pl-2"
+                  required
+                  className="bg-[#31566A] w-full text-white rounded-[7px] h-[35px] text-[12px] pl-2 focus:outline-none border-[1px] border-[#32566A] focus:border-gray-300 focus:ring-0"
                 />
                 <input
-                  type="text"
+                  type="number"
                   id="conference-date"
+                  inputMode="numeric"
+                  ref={yearRef}
+                  onChange={handleYearInputChange}
                   placeholder="YYYY"
-                  className="bg-[#31566A] w-full text-white rounded-[7px] h-[35px] text-[12px] pl-2"
+                  required
+                  className="bg-[#31566A] w-full text-white rounded-[7px] h-[35px] text-[12px] pl-2 focus:outline-none border-[1px] border-[#32566A] focus:border-gray-300 focus:ring-0"
                 />
               </div>
-            </div> 
+            </div>
             <button className="w-full h-[40px] rounded-[7px] hover:bg-gray-200 bg-white text-[#31566A] mt-10">
               SUBMIT
             </button>

@@ -3,3 +3,13 @@
 @tailwind utilities;
 
 
+body {
+    background-color: #0A0C2B;
+}
+
+/* number input arrow hide */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

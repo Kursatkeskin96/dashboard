@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import stars from "@/utils/images/loginscreen.png";
+import stars from "@/utils/images/loginscreen.webp";
 
 export default function Page() {
   const [isEmailCorrect, setIsEmailCorrect] = useState(true);
@@ -47,7 +47,7 @@ export default function Page() {
 
   return (
     <div className="flex justify-center items-center min-h-screen">
-      <div className="flex flex-col justify-start items-center bg-[#F5F5F5] w-[90%] h-fit md:w-[400px] lg:w-[500px] md:h-[600px] pb-10 rounded-[15px]">
+      <div className="flex flex-col justify-start items-center bg-white w-[90%] h-fit md:w-[400px] lg:w-[500px] md:h-[600px] pb-10 rounded-[15px]">
         <div className="relative w-full h-[200px] md:h-[250px] flex jsutify-center items-center">
           <Image
             src={stars}
@@ -55,11 +55,11 @@ export default function Page() {
             sizes="auto"
             priority
             fill={true}
-            className="absolute rounded-[15px]"
+            className="absolute rounded-t-[15px]"
           />
         </div>
         <h1 className="text-3xl absolute pt-10 font-bold text-white">
-          Sign Up
+          Sign In
         </h1>
         <div className="flex justify-start w-full items-center px-10 flex-col">
           <label htmlFor="email" className="text-[#898989] pt-12 w-full">
@@ -108,7 +108,7 @@ export default function Page() {
           )}
           <button
             onClick={handleSubmit}
-            className="w-full h-[40px] bg-[#C60166] text-white mt-10 font-bold text-center"
+            className="w-full h-[45px] rounded-md bg-[#C60166] text-white mt-10 font-bold text-center"
           >
             Sign In
           </button>
