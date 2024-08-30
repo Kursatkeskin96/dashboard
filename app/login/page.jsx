@@ -1,7 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Image from "next/image";
 import stars from "@/utils/images/loginscreen.webp";
+import { useRouter } from "next/navigation";
+import { AuthContext } from "@/authContext";
+import ClipLoader from "react-spinners/ClipLoader";
 
 export default function Page() {
   const [isEmailCorrect, setIsEmailCorrect] = useState(true);
@@ -9,6 +12,11 @@ export default function Page() {
   const [showError, setShowError] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false)
+
+  const { login } = useContext(AuthContext);
+
+  const router = useRouter();
 
   const handleEmailChange = (e) => {
     const value = e.target.value.toLowerCase();
@@ -25,23 +33,50 @@ export default function Page() {
     setPassword(value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true)
 
     if (!validateEmail(email)) {
       setIsEmailCorrect(false);
+      setLoading(false);
     } else {
       setIsEmailCorrect(true);
     }
 
     if (password.length < 5) {
       setIsPasswordCorrect(false);
+      setLoading(false);
     } else {
       setIsPasswordCorrect(true);
     }
 
-    if (validateEmail(email) && password === confirmPassword) {
-      console.log("Form Submitted:", { email, password });
+    if (validateEmail(email) && password.length >= 5) {
+      try {
+        const response = await fetch("http://127.0.0.1:8000/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: new URLSearchParams({
+            username: email,
+            password: password,
+          }),
+        });
+
+        if (!response.ok) {
+          setShowError(true);
+        } else {
+          const data = await response.json();
+          login(data.access_token); // Update the global state
+          setShowError(false);
+          router.push("/admin");
+        }
+      } catch (error) {
+        console.error("Error during login:", error);
+        setShowError(true);
+        setLoading(false);
+      }
     }
   };
 
@@ -106,12 +141,27 @@ export default function Page() {
               Your credentials are wrong. Please try again.
             </p>
           )}
-          <button
-            onClick={handleSubmit}
-            className="w-full h-[45px] rounded-md bg-[#C60166] text-white mt-10 font-bold text-center"
-          >
-            Sign In
-          </button>
+          {loading ? (
+            <button
+              disabled
+              className="w-full h-[45px] rounded-md bg-[rgba(198,1,103,0.84)] text-white mt-10 font-bold text-center"
+            >
+              <ClipLoader
+                color="#fff"
+                loading={loading}
+                size={20}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+              />
+            </button>
+          ) : (
+            <button
+              onClick={handleSubmit}
+              className="w-full h-[45px] rounded-md bg-[#C60166] text-white mt-10 font-bold text-center"
+            >
+              Sign In
+            </button>
+          )}
         </div>
       </div>
     </div>

@@ -1,45 +1,48 @@
-'use client'
-import React, {useState, useRef} from "react";
+"use client";
+import React, { useState, useRef } from "react";
+import { useRouter } from "next/navigation";
 import stars from "@/utils/images/stars.webp";
 import Image from "next/image";
 
 export default function Page() {
-  const [email, setEmail] = useState('')
-  const [firstname, setFirstname] = useState('')
-  const [lastname, setLastname] = useState('')
-  const [conferenceName, setConferenceName] = useState('')
-  const [conferenceLocation, setConferenceLocation] = useState('')
-  const [conferenceDetail, setConferenceDetail] = useState('')
-  const [isEmailValid, setIsEmailValid] = useState(true)
+  const [email, setEmail] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [conferenceName, setConferenceName] = useState("");
+  const [conferenceLocation, setConferenceLocation] = useState("");
+  const [conferenceDetail, setConferenceDetail] = useState("");
+  const [isEmailValid, setIsEmailValid] = useState(true);
   const [conferenceDate, setConferenceDate] = useState({
     day: "",
     month: "",
     year: "",
   });
 
-    const dayRef = useRef(null);
-    const monthRef = useRef(null);
-    const yearRef = useRef(null);
+  const router = useRouter()
 
-    const handleFirstname = (e) => {
-      setFirstname(e.target.value)
-    }
+  const dayRef = useRef(null);
+  const monthRef = useRef(null);
+  const yearRef = useRef(null);
 
-    const handleLastname = (e) => {
-      setLastname(e.target.value)
-    }
+  const handleFirstname = (e) => {
+    setFirstname(e.target.value);
+  };
 
-    const handleConfName = (e) => {
-      setConferenceName(e.target.value)
-    }
+  const handleLastname = (e) => {
+    setLastname(e.target.value);
+  };
 
-    const handleConfLocation = (e) => {
-      setConferenceLocation(e.target.value)
-    }
+  const handleConfName = (e) => {
+    setConferenceName(e.target.value);
+  };
 
-    const handleConfDetail = (e) => {
-      setConferenceDetail(e.target.value)
-    }
+  const handleConfLocation = (e) => {
+    setConferenceLocation(e.target.value);
+  };
+
+  const handleConfDetail = (e) => {
+    setConferenceDetail(e.target.value);
+  };
 
   const handleDayInputChange = (e) => {
     const value = e.target.value;
@@ -76,7 +79,7 @@ export default function Page() {
   const handleYearInputChange = (e) => {
     const value = e.target.value;
     if (value.length <= 4) {
-      if (value > 2025){
+      if (value > 2025) {
         e.target.value = "";
       }
       setConferenceDate((prev) => ({ ...prev, year: value }));
@@ -85,18 +88,53 @@ export default function Page() {
     }
   };
 
-   const handleEmailChange = (e) => {
-     const value = e.target.value;
-     setEmail(value);
-     const valid = validateEmail(value);
-     setIsEmailValid(valid);
-   };
+  const handleEmailChange = (e) => {
+    const value = e.target.value;
+    setEmail(value);
+    const valid = validateEmail(value);
+    setIsEmailValid(valid);
+  };
 
-   const validateEmail = (email) => {
-     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-     return re.test(String(email).toLowerCase());
-   };
+  const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(String(email).toLowerCase());
+  };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const data = {
+      firstname,
+      lastname,
+      email,
+      conference_name: conferenceName,
+      conference_location: conferenceLocation,
+      conference_detail: conferenceDetail,
+      conference_date: `${conferenceDate.day}/${conferenceDate.month}/${conferenceDate.year}`,
+      status: "pending",
+    };
+
+    try {
+      const response = await fetch("http://127.0.0.1:8000/posts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        router.push(
+          `/success?place=${conferenceLocation}&date=${conferenceDate.day}/${conferenceDate.month}/${conferenceDate.year}`
+        );
+        // Optionally clear the form or show a success message
+      } else {
+        console.error("Failed to submit form");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
+  };
   return (
     <div className="w-full flex justify-center items-center min-h-screen bg-[#F5F5F5]">
       <div className="w-[90%] md:w-[900px] h-auto md:h-[600px] mt-20 md:mt-0 rounded-[15px] bg-[#1E323D] flex flex-col md:flex-row justify-center items-center">
@@ -173,7 +211,9 @@ export default function Page() {
                 onChange={handleEmailChange}
                 value={email}
                 placeholder="johndoe@gmail.com"
-                className={`bg-[#31566A] text-white rounded-[7px] h-[35px] text-[12px] pl-2 focus:outline-none border-[1px] focus:border-gray-300 focus:ring-0 ${isEmailValid ? 'border-[#32566A]' : 'border-red-700'}`}
+                className={`bg-[#31566A] text-white rounded-[7px] h-[35px] text-[12px] pl-2 focus:outline-none border-[1px] focus:border-gray-300 focus:ring-0 ${
+                  isEmailValid ? "border-[#32566A]" : "border-red-700"
+                }`}
               />
             </div>
             <div className="flex flex-col md:flex-row justify-center items-center gap-4 pt-4">
@@ -269,7 +309,7 @@ export default function Page() {
                 />
               </div>
             </div>
-            <button className="w-full h-[40px] rounded-[7px] hover:bg-gray-200 bg-white text-[#31566A] mt-10">
+            <button onClick={handleSubmit} className="w-full h-[40px] rounded-[7px] hover:bg-gray-200 bg-white text-[#31566A] mt-10">
               SUBMIT
             </button>
           </form>

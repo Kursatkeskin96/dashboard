@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import stars from "@/utils/images/loginscreen.webp";
+import ClipLoader from "react-spinners/ClipLoader";
 
 export default function Page() {
   const [isEmailCorrect, setIsEmailCorrect] = useState(true);
@@ -11,6 +12,7 @@ export default function Page() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [arePasswordsMatch, setArePasswordsMatch] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const handleEmailChange = (e) => {
     const value = e.target.value.toLowerCase();
@@ -34,21 +36,25 @@ export default function Page() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+        setLoading(true);
 
     if (!validateEmail(email)) {
       setIsEmailCorrect(false);
+          setLoading(false);
     } else {
       setIsEmailCorrect(true);
     }
 
     if (password !== confirmPassword) {
       setArePasswordsMatch(false);
+      setLoading(false);
     } else {
       setArePasswordsMatch(true);
     }
 
     if (password.length < 5) {
       setIsPasswordCorrect(false);
+      setLoading(false);
     } else {
       setIsPasswordCorrect(true);
     }
