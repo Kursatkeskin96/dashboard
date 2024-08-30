@@ -8,8 +8,6 @@ const SECRET_KEY = new TextEncoder().encode(
 export async function middleware(request) {
   const token = request.cookies.get("access_token")?.value;
 
-  console.log("Token in middleware:", token);
-
   if (!token) {
     console.log("No token found, redirecting to login.");
     return NextResponse.redirect(new URL("/login", request.url));
@@ -18,8 +16,6 @@ export async function middleware(request) {
   try {
     // Verify the token using jose
     const { payload } = await jwtVerify(token, SECRET_KEY);
-
-    console.log("Token decoded successfully:", payload);
 
     // Check if the token contains the expected claims
     if (!payload.user_id) {

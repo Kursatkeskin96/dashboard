@@ -299,7 +299,7 @@ export default function Page() {
         </div>
 
         {/* Second Full-Width Box */}
-        <div className="w-full h-auto mt-10 lg:mt-20 rounded-[20px] min-h-[500x] bg-custom-gradient flex flex-col justify-center items-center gap-5 p-8">
+        <div className="w-full h-auto mt-10 lg:mt-20 rounded-[20px] min-h-[600px] bg-custom-gradient flex flex-col justify-center items-center gap-5 p-8">
           {/* Table Heading */}
           {loading ? (
             // Show spinner or loading message when data is still loading
@@ -317,12 +317,12 @@ export default function Page() {
           ) : (
             // Show content when loading is false
             <div>
-              <div className="hidden md:flex w-full justify-between items-center border-b-[1px] border-gray-300 pb-4">
+              <div className="hidden md:flex w-full justify-between items-center border-b-[1px] border-gray-300 pb-4 ">
                 <p className="w-[15%] text-gray-500 font-semibold">Full Name</p>
                 <p className="w-[10%] text-gray-500 font-semibold">
                   Department
                 </p>
-                <p className="w-[15%] text-gray-500 font-semibold">
+                <p className=" text-gray-500 font-semibold">
                   Conference Name
                 </p>
                 <p className="w-[30%] text-gray-500 font-semibold">
@@ -340,7 +340,7 @@ export default function Page() {
                 >
                   <div className="w-full md:w-[15%] mb-2 md:mb-0">
                     <p className="text-gray-500 md:hidden">Full Name</p>
-                    <p className="text-black font-semibold">
+                    <p className="text-black  font-semibold">
                       {request.firstname} {request.lastname}
                     </p>
                   </div>
@@ -349,7 +349,7 @@ export default function Page() {
                     <p className="text-black">Software</p>
                   </div>
                   <div className="w-full md:w-[15%] mb-2 md:mb-0">
-                    <p className="text-gray-500 md:hidden">Conference Name</p>
+                    <p className="text-gray-500 md:hiddente">Conference Name</p>
                     <p className="text-black">{request.conference_name}</p>
                   </div>
                   <div className="w-full md:w-[30%] mb-2 md:mb-0">
