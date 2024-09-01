@@ -21,7 +21,7 @@ export default function Page() {
 
  useEffect(() => {
    setLoading(true);
-   fetch("http://127.0.0.1:8000/posts")
+   fetch("http://16.171.30.91:8000/posts")
      .then((response) => response.json())
      .then((data) => {
        const sortedData = data.sort((a, b) => {
@@ -92,7 +92,7 @@ export default function Page() {
       )
     );
 
-    fetch(`http://127.0.0.1:8000/posts/${id}`, {
+    fetch(`http://16.171.30.91:8000/posts/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -316,7 +316,7 @@ export default function Page() {
             </div>
           ) : (
             // Show content when loading is false
-            <div>
+            <div className="w-full">
               <div className="hidden md:flex w-full justify-between items-center border-b-[1px] border-gray-300 pb-4 ">
                 <p className="w-[15%] text-gray-500 font-semibold">Full Name</p>
                 <p className="w-[10%] text-gray-500 font-semibold">
@@ -349,7 +349,6 @@ export default function Page() {
                     <p className="text-black">Software</p>
                   </div>
                   <div className="w-full md:w-[15%] mb-2 md:mb-0">
-                    <p className="text-gray-500 md:hiddente">Conference Name</p>
                     <p className="text-black">{request.conference_name}</p>
                   </div>
                   <div className="w-full md:w-[30%] mb-2 md:mb-0">
@@ -456,7 +455,7 @@ export default function Page() {
           </div>
 
           {/* Second box takes the remaining 1 column */}
-          <div className="w-full h-auto rounded-[20px] bg-custom-gradient p-6">
+          <div className="w-full h-auto rounded-[20px] bg-custom-gradient p-1 2xl:p-6">
             {/* Header */}
             <h2 className="text-2xl pl-[16px] font-bold text-black mb-6">
               Most Attenders

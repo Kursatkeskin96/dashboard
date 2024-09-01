@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import stars from "@/utils/images/loginscreen.webp";
 import ClipLoader from "react-spinners/ClipLoader";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
   const [isEmailCorrect, setIsEmailCorrect] = useState(true);
@@ -14,10 +15,15 @@ export default function Page() {
   const [arePasswordsMatch, setArePasswordsMatch] = useState(true);
   const [loading, setLoading] = useState(false);
 
+
+
   const handleEmailChange = (e) => {
     const value = e.target.value.toLowerCase();
     setEmail(value);
   };
+  
+  const router = useRouter();
+
 
   const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -34,13 +40,13 @@ export default function Page() {
     setConfirmPassword(value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-        setLoading(true);
+    setLoading(true);
 
     if (!validateEmail(email)) {
       setIsEmailCorrect(false);
-          setLoading(false);
+      setLoading(false);
     } else {
       setIsEmailCorrect(true);
     }
@@ -59,8 +65,34 @@ export default function Page() {
       setIsPasswordCorrect(true);
     }
 
-    if (validateEmail(email) && password === confirmPassword) {
+    if (validateEmail(email) && password === confirmPassword && password.length >= 5) {
       console.log("Form Submitted:", { email, password });
+
+      try {
+        const response = await fetch("http://16.171.30.91:8000/users", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          console.log("User created successfully:", data);
+          router.push('/login')
+          // Optionally redirect or show a success message
+        } else {
+          console.error("Error creating user:", data);
+          setShowError(true);
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        setShowError(true);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -142,15 +174,16 @@ export default function Page() {
 
           {showError && (
             <p className="w-full pt-2 text-red-600 text-xs">
-              Your credentials are wrong. Please try again.
+              An error occurred. Please try again.
             </p>
           )}
 
           <button
             className="w-full h-[45px] rounded-md bg-[#C60166] text-white mt-10 font-bold text-center"
             onClick={handleSubmit}
+            disabled={loading}
           >
-            Sign Up
+            {loading ? <ClipLoader size={24} color="#fff" /> : "Sign Up"}
           </button>
         </div>
       </div>
