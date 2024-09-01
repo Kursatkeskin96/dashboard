@@ -19,9 +19,11 @@ export default function Page() {
   const [currentPage, setCurrentPage] = useState(1);
   const recordsPerPage = 5; // Number of records to show per page
 
+  const API_URL = "/api"; // Use the proxy endpoint
+
  useEffect(() => {
    setLoading(true);
-   fetch("http://16.171.30.91:8000/posts")
+   fetch(`${API_URL}/posts`)
      .then((response) => response.json())
      .then((data) => {
        const sortedData = data.sort((a, b) => {

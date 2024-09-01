@@ -53,7 +53,8 @@ export default function Page() {
 
     if (validateEmail(email) && password.length >= 5) {
       try {
-        const response = await fetch("http://16.171.30.91:8000/login", {
+        const API_URL = "/api"; // Use the proxy endpoint
+        const response = await  fetch(`${API_URL}/posts`, {
           method: "POST",
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
