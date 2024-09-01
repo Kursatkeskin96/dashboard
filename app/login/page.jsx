@@ -54,12 +54,12 @@ export default function Page() {
     if (validateEmail(email) && password.length >= 5) {
       try {
         const API_URL = "/api"; // Use the proxy endpoint
-        const response = await  fetch(`${API_URL}/posts`, {
+        const response = await   fetch(`${API_URL}/login`,{
           method: "POST",
           headers: {
-            "Content-Type": "application/json", // Specify JSON format
+            "Content-Type": "application/x-www-form-urlencoded",
           },
-          body: JSON.stringify({
+          body: new URLSearchParams({
             username: email,
             password: password,
           }),
