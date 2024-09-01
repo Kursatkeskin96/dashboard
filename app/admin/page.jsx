@@ -23,7 +23,7 @@ export default function Page() {
 
  useEffect(() => {
    setLoading(true);
-   fetch(`${API_URL}/posts`)
+   fetch(`http://16.171.30.91:8000/posts`)
      .then((response) => response.json())
      .then((data) => {
        const sortedData = data.sort((a, b) => {
@@ -95,7 +95,7 @@ export default function Page() {
       )
     );
 
-    fetch(`${API_URL}/posts/${id}`, {
+    fetch(`http://16.171.30.91:8000/posts/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -302,7 +302,7 @@ export default function Page() {
         </div>
 
         {/* Second Full-Width Box */}
-        <div className="w-full h-auto mt-10 lg:mt-20 rounded-[20px] min-h-[600px] bg-custom-gradient flex flex-col justify-center items-center gap-5 p-8">
+        <div className="w-full h-auto mt-10 lg:mt-20 rounded-[20px] min-h-[600px] bg-custom-gradient flex flex-col justify-start items-center gap-5 p-8">
           {/* Table Heading */}
           {loading ? (
             // Show spinner or loading message when data is still loading
@@ -387,7 +387,7 @@ export default function Page() {
               ))}
 
               {/* Pagination Controls */}
-              <div className="flex justify-center mt-4">
+              <div className="flex justify-center items-end h-full mt-4">
                 {[...Array(Math.ceil(requests.length / recordsPerPage))].map(
                   (_, pageIndex) => (
                     <button
@@ -442,7 +442,7 @@ export default function Page() {
                     {upcomingEvents.map((request, index) => (
                       <tr
                         key={index}
-                        className="text-black border-b-[1px] border-gray-300"
+                        className="text-black border-b-[1px] border-gray-300 text-sm"
                       >
                         <td className="py-3 px-4">{request.conference_name}</td>
                         <td className="py-3 px-4">
@@ -457,50 +457,51 @@ export default function Page() {
             )}
           </div>
 
-          {/* Second box takes the remaining 1 column */}
-          <div className="w-full h-auto rounded-[20px] bg-custom-gradient p-1 2xl:p-6">
-            {/* Header */}
-            <h2 className="text-2xl pl-[16px] font-bold text-black mb-6">
-              Most Attenders
-            </h2>
+        {/* Second box takes the remaining 1 column */}
+<div className="w-full h-auto rounded-[20px] bg-custom-gradient p-1 2xl:p-6 flex flex-col justify-start" style={{ minHeight: "100%" }}>
+  {/* Header */}
+  <h2 className="text-2xl pl-[16px] font-bold text-black mb-6">
+    Most Attenders
+  </h2>
 
-            {loading ? (
-              <div className="w-full overflow-x-auto flex justify-center items-center">
-                <BeatLoader
-                  color="#0A0C2B"
-                  loading={loading}
-                  size={5}
-                  aria-label="Loading Spinner"
-                  data-testid="loader"
-                />
-              </div>
-            ) : (
-              <div className="w-full overflow-x-auto">
-                <table className="w-full text-left">
-                  {/* Table Heading */}
-                  <thead>
-                    <tr className="text-gray-500 text-sm border-b-[1px] border-gray-300">
-                      <th className="py-3 px-4 w-2/3">Full Name</th>
-                      <th className="py-3 px-4 w-1/3">Times Attended</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {mostAttenders.map((attender, index) => (
-                      <tr
-                        key={index}
-                        className="text-black border-b-[1px] border-gray-300"
-                      >
-                        <td className="py-3 px-4">
-                          {attender.firstname} {attender.lastname}
-                        </td>
-                        <td className="py-3 px-4">{attender.count}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
-          </div>
+  {loading ? (
+    <div className="w-full overflow-x-auto flex justify-center items-center">
+      <BeatLoader
+        color="#0A0C2B"
+        loading={loading}
+        size={5}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
+    </div>
+  ) : (
+    <div className="w-full overflow-x-auto flex-grow">
+      <table className="w-full text-left">
+        {/* Table Heading */}
+        <thead>
+          <tr className="text-gray-500 text-sm border-b-[1px] border-gray-300">
+            <th className="py-3 px-4 w-2/3">Full Name</th>
+            <th className="py-3 px-4 w-1/3">Attendance</th>
+          </tr>
+        </thead>
+        <tbody>
+          {mostAttenders.map((attender, index) => (
+            <tr
+              key={index}
+              className="text-black border-b-[1px] border-gray-300 text-sm"
+            >
+              <td className="py-3 px-4">
+                {attender.firstname} {attender.lastname}
+              </td>
+              <td className="py-3 px-4">{attender.count}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )}
+</div>
+
         </div>
       </div>
     </div>
