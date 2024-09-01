@@ -53,7 +53,7 @@ export default function Page() {
 
     if (validateEmail(email) && password.length >= 5) {
       try {
-        const API_URL = "/api"; // Use the proxy endpoint
+        const API_URL = "/api";
         const response = await   fetch(`${API_URL}/login`,{
           method: "POST",
           headers: {

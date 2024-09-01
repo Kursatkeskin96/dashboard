@@ -88,13 +88,14 @@ export default function Page() {
   };
 
   const handleStatusChange = (id, newStatus, index) => {
+    const API_URL = "/api";
     setRequests((prevRequests) =>
       prevRequests.map((r, i) =>
         i === index ? { ...r, status: newStatus } : r
       )
     );
 
-    fetch(`http://16.171.30.91:8000/posts/${id}`, {
+    fetch(`${API_URL}/posts/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
