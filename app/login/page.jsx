@@ -57,9 +57,9 @@ export default function Page() {
         const response = await  fetch(`${API_URL}/posts`, {
           method: "POST",
           headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/json", // Specify JSON format
           },
-          body: new URLSearchParams({
+          body: JSON.stringify({
             username: email,
             password: password,
           }),
