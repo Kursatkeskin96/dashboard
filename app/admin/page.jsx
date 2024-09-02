@@ -22,7 +22,8 @@ export default function Page() {
 
  useEffect(() => {
    setLoading(true);
-   fetch(`http://13.60.207.223:8000/posts`)
+   const API_URL = '/api'
+   fetch(`${API_URL}/posts`)
      .then((response) => response.json())
      .then((data) => {
        const sortedData = data.sort((a, b) => {
@@ -93,8 +94,8 @@ export default function Page() {
         i === index ? { ...r, status: newStatus } : r
       )
     );
-
-    fetch(`http://13.60.207.223:8000/posts/${id}`, {
+    const API_URL = '/api'
+    fetch(`${API_URL}/posts/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

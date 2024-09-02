@@ -69,7 +69,8 @@ export default function Page() {
       console.log("Form Submitted:", { email, password });
 
       try {
-        const response = await fetch(`http://13.60.207.223:8000/users`, {
+        const API_URL = '/api'
+        const response = await fetch(`${API_URL}/users`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
