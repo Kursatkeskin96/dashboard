@@ -10,7 +10,6 @@ import postman from '@/utils/images/postman.png'
 import react from '@/utils/images/react.png'
 import tailwind from '@/utils/images/tailwind.png'
 import Image from 'next/image'
-import { motion } from "framer-motion";
 
 export default function SliderComponent() {
   return (
