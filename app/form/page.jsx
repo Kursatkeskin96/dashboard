@@ -12,13 +12,14 @@ export default function Page() {
   const [conferenceLocation, setConferenceLocation] = useState("");
   const [conferenceDetail, setConferenceDetail] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(true);
+  const [inputErrors, setInputErrors] = useState({}); // Track input errors
   const [conferenceDate, setConferenceDate] = useState({
     day: "",
     month: "",
     year: "",
   });
 
-  const router = useRouter()
+  const router = useRouter();
 
   const dayRef = useRef(null);
   const monthRef = useRef(null);
@@ -26,22 +27,37 @@ export default function Page() {
 
   const handleFirstname = (e) => {
     setFirstname(e.target.value);
+    if (e.target.value) {
+      setInputErrors((prev) => ({ ...prev, firstname: false }));
+    }
   };
 
   const handleLastname = (e) => {
     setLastname(e.target.value);
+    if (e.target.value) {
+      setInputErrors((prev) => ({ ...prev, lastname: false }));
+    }
   };
 
   const handleConfName = (e) => {
     setConferenceName(e.target.value);
+    if (e.target.value) {
+      setInputErrors((prev) => ({ ...prev, conferenceName: false }));
+    }
   };
 
   const handleConfLocation = (e) => {
     setConferenceLocation(e.target.value);
+    if (e.target.value) {
+      setInputErrors((prev) => ({ ...prev, conferenceLocation: false }));
+    }
   };
 
   const handleConfDetail = (e) => {
     setConferenceDetail(e.target.value);
+    if (e.target.value) {
+      setInputErrors((prev) => ({ ...prev, conferenceDetail: false }));
+    }
   };
 
   const handleDayInputChange = (e) => {
@@ -57,6 +73,9 @@ export default function Page() {
       }
     } else {
       e.target.value = value.slice(0, 2);
+    }
+    if (value) {
+      setInputErrors((prev) => ({ ...prev, day: false }));
     }
   };
 
@@ -74,6 +93,9 @@ export default function Page() {
     } else {
       e.target.value = value.slice(0, 2);
     }
+    if (value) {
+      setInputErrors((prev) => ({ ...prev, month: false }));
+    }
   };
 
   const handleYearInputChange = (e) => {
@@ -86,6 +108,9 @@ export default function Page() {
     } else {
       e.target.value = value.slice(0, 4);
     }
+    if (value) {
+      setInputErrors((prev) => ({ ...prev, year: false }));
+    }
   };
 
   const handleEmailChange = (e) => {
@@ -93,6 +118,9 @@ export default function Page() {
     setEmail(value);
     const valid = validateEmail(value);
     setIsEmailValid(valid);
+    if (valid) {
+      setInputErrors((prev) => ({ ...prev, email: false }));
+    }
   };
 
   const validateEmail = (email) => {
@@ -102,6 +130,23 @@ export default function Page() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validate all fields
+    const errors = {};
+    if (!firstname) errors.firstname = true;
+    if (!lastname) errors.lastname = true;
+    if (!email || !isEmailValid) errors.email = true;
+    if (!conferenceName) errors.conferenceName = true;
+    if (!conferenceLocation) errors.conferenceLocation = true;
+    if (!conferenceDetail) errors.conferenceDetail = true;
+    if (!conferenceDate.day) errors.day = true;
+    if (!conferenceDate.month) errors.month = true;
+    if (!conferenceDate.year) errors.year = true;
+
+    if (Object.keys(errors).length > 0) {
+      setInputErrors(errors);
+      return; // Prevent API request if there are errors
+    }
 
     const data = {
       firstname,
@@ -116,7 +161,7 @@ export default function Page() {
 
     try {
       const API_URL = "/api";
-      const response = await fetch(`${API_URL}/posts` , {
+      const response = await fetch(`${API_URL}/posts`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -136,6 +181,7 @@ export default function Page() {
       console.error("Error submitting form:", error);
     }
   };
+
   return (
     <div className="w-full flex justify-center items-center min-h-screen bg-[#F5F5F5]">
       <div className="w-[90%] md:w-[900px] h-auto md:h-[600px] mt-20 md:mt-0 rounded-[15px] bg-[#1E323D] flex flex-col md:flex-row justify-center items-center">
@@ -147,6 +193,7 @@ export default function Page() {
             fill={true}
             className="absolute object-cover rounded-t-[15px] md:rounded-r-none md:rounded-l-[15px]"
             priority
+            
           />
           <p className="absolute text-white text-center top-[50%] w-full opacity-75">
             Expand Your Knowledge and Network Globally
@@ -178,7 +225,11 @@ export default function Page() {
                   autoComplete="given-name"
                   required
                   placeholder="John"
-                  className="bg-[#31566A] w-full text-white rounded-[7px] h-[35px] text-[12px] pl-2 focus:outline-none border-[1px] border-[#32566A] focus:border-gray-300 focus:ring-0"
+                  className={`bg-[#31566A] w-full text-white rounded-[7px] h-[35px] text-[12px] pl-2 focus:outline-none border-[1px] ${
+                    inputErrors.firstname
+                      ? "border-red-700"
+                      : "border-[#32566A]"
+                  } focus:border-gray-300 focus:ring-0`}
                 />
               </div>
               <div className="w-full md:w-1/2">
@@ -196,7 +247,9 @@ export default function Page() {
                   autoComplete="family-name"
                   required
                   id="lastname"
-                  className="bg-[#31566A] text-white rounded-[7px] w-full h-[35px] text-[12px] pl-2 focus:outline-none border-[1px] border-[#32566A] focus:border-gray-300 focus:ring-0"
+                  className={`bg-[#31566A] text-white rounded-[7px] w-full h-[35px] text-[12px] pl-2 focus:outline-none border-[1px] ${
+                    inputErrors.lastname ? "border-red-700" : "border-[#32566A]"
+                  } focus:border-gray-300 focus:ring-0`}
                 />
               </div>
             </div>
@@ -212,9 +265,11 @@ export default function Page() {
                 onChange={handleEmailChange}
                 value={email}
                 placeholder="johndoe@gmail.com"
-                className={`bg-[#31566A] text-white rounded-[7px] h-[35px] text-[12px] pl-2 focus:outline-none border-[1px] focus:border-gray-300 focus:ring-0 ${
-                  isEmailValid ? "border-[#32566A]" : "border-red-700"
-                }`}
+                className={`bg-[#31566A] text-white rounded-[7px] h-[35px] text-[12px] pl-2 focus:outline-none border-[1px] ${
+                  inputErrors.email || !isEmailValid
+                    ? "border-red-700"
+                    : "border-[#32566A]"
+                } focus:border-gray-300 focus:ring-0`}
               />
             </div>
             <div className="flex flex-col md:flex-row justify-center items-center gap-4 pt-4">
@@ -232,7 +287,11 @@ export default function Page() {
                   onChange={handleConfName}
                   required
                   id="conference-name"
-                  className="bg-[#31566A] text-white rounded-[7px] w-full h-[35px] text-[12px] pl-2 focus:outline-none border-[1px] border-[#32566A] focus:border-gray-300 focus:ring-0"
+                  className={`bg-[#31566A] text-white rounded-[7px] w-full h-[35px] text-[12px] pl-2 focus:outline-none border-[1px] ${
+                    inputErrors.conferenceName
+                      ? "border-red-700"
+                      : "border-[#32566A]"
+                  } focus:border-gray-300 focus:ring-0`}
                 />
               </div>
               <div className="w-full md:w-1/2">
@@ -249,7 +308,11 @@ export default function Page() {
                   onChange={handleConfLocation}
                   id="conference-location"
                   required
-                  className="bg-[#31566A] text-white rounded-[7px] w-full h-[35px] text-[12px] pl-2 focus:outline-none border-[1px] border-[#32566A] focus:border-gray-300 focus:ring-0"
+                  className={`bg-[#31566A] text-white rounded-[7px] w-full h-[35px] text-[12px] pl-2 focus:outline-none border-[1px] ${
+                    inputErrors.conferenceLocation
+                      ? "border-red-700"
+                      : "border-[#32566A]"
+                  } focus:border-gray-300 focus:ring-0`}
                 />
               </div>
             </div>
@@ -267,7 +330,11 @@ export default function Page() {
                 onChange={handleConfDetail}
                 required
                 placeholder="Please type your conference detail..."
-                className="bg-[#31566A] text-white rounded-[7px] h-[35px] text-[12px] pl-2 focus:outline-none border-[1px] border-[#32566A] focus:border-gray-300 focus:ring-0"
+                className={`bg-[#31566A] text-white rounded-[7px] h-[35px] text-[12px] pl-2 focus:outline-none border-[1px] ${
+                  inputErrors.conferenceDetail
+                    ? "border-red-700"
+                    : "border-[#32566A]"
+                } focus:border-gray-300 focus:ring-0`}
               />
             </div>
             <div className="flex flex-col pt-4">
@@ -286,7 +353,9 @@ export default function Page() {
                   ref={dayRef}
                   onChange={handleDayInputChange}
                   required
-                  className="bg-[#31566A] w-full text-white rounded-[7px] h-[35px] text-[12px] pl-2 focus:outline-none border-[1px] border-[#32566A] focus:border-gray-300 focus:ring-0"
+                  className={`bg-[#31566A] w-full text-white rounded-[7px] h-[35px] text-[12px] pl-2 focus:outline-none border-[1px] ${
+                    inputErrors.day ? "border-red-700" : "border-[#32566A]"
+                  } focus:border-gray-300 focus:ring-0`}
                 />
                 <input
                   type="number"
@@ -296,7 +365,9 @@ export default function Page() {
                   onChange={handleMonthInputChange}
                   placeholder="MM"
                   required
-                  className="bg-[#31566A] w-full text-white rounded-[7px] h-[35px] text-[12px] pl-2 focus:outline-none border-[1px] border-[#32566A] focus:border-gray-300 focus:ring-0"
+                  className={`bg-[#31566A] w-full text-white rounded-[7px] h-[35px] text-[12px] pl-2 focus:outline-none border-[1px] ${
+                    inputErrors.month ? "border-red-700" : "border-[#32566A]"
+                  } focus:border-gray-300 focus:ring-0`}
                 />
                 <input
                   type="number"
@@ -306,11 +377,16 @@ export default function Page() {
                   onChange={handleYearInputChange}
                   placeholder="YYYY"
                   required
-                  className="bg-[#31566A] w-full text-white rounded-[7px] h-[35px] text-[12px] pl-2 focus:outline-none border-[1px] border-[#32566A] focus:border-gray-300 focus:ring-0"
+                  className={`bg-[#31566A] w-full text-white rounded-[7px] h-[35px] text-[12px] pl-2 focus:outline-none border-[1px] ${
+                    inputErrors.year ? "border-red-700" : "border-[#32566A]"
+                  } focus:border-gray-300 focus:ring-0`}
                 />
               </div>
             </div>
-            <button onClick={handleSubmit} className="w-full h-[40px] rounded-[7px] hover:bg-gray-200 bg-white text-[#31566A] mt-10">
+            <button
+              onClick={handleSubmit}
+              className="w-full h-[40px] rounded-[7px] hover:bg-gray-200 bg-white text-[#31566A] mt-10"
+            >
               SUBMIT
             </button>
           </form>

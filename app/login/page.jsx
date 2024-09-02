@@ -35,11 +35,12 @@ export default function Page() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true)
+    setLoading(true);
 
     if (!validateEmail(email)) {
       setIsEmailCorrect(false);
       setLoading(false);
+      return;
     } else {
       setIsEmailCorrect(true);
     }
@@ -47,14 +48,15 @@ export default function Page() {
     if (password.length < 5) {
       setIsPasswordCorrect(false);
       setLoading(false);
+      return;
     } else {
       setIsPasswordCorrect(true);
     }
 
     if (validateEmail(email) && password.length >= 5) {
       try {
-        const API_URL = "/api";
-        const response = await   fetch(`http://16.171.30.91:8000/login`,{
+        const API_URL = "/api"
+        const response = await fetch(`${API_URL}/login`, {
           method: "POST",
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
@@ -67,11 +69,15 @@ export default function Page() {
 
         if (!response.ok) {
           setShowError(true);
+          setLoading(false);
+          return;
         } else {
           const data = await response.json();
           login(data.access_token); // Update the global state
           setShowError(false);
-          router.push("/admin");
+          setLoading(false);
+          console.log("Navigating to /admin");
+          router.push("/admin"); // Ensure the redirect happens
         }
       } catch (error) {
         console.error("Error during login:", error);

@@ -13,7 +13,7 @@ export default function Page() {
   const [totalApproved, setTotalApproved] = useState(0);
   const [approvalRate, setApprovalRate] = useState(0);
   const [mostAttenders, setMostAttenders] = useState([]);
-  const [loading, setLoading] = useState(true); // New loading state
+  const [loading, setLoading] = useState(true); 
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
@@ -23,12 +23,13 @@ export default function Page() {
 
  useEffect(() => {
    setLoading(true);
-   fetch(`http://16.171.30.91:8000/posts`)
+    const API_URL = "/api";
+   fetch(`${API_URL}/posts`)
      .then((response) => response.json())
      .then((data) => {
        const sortedData = data.sort((a, b) => {
-         const dateA = new Date(a.created_at).getTime(); 
-         const dateB = new Date(b.created_at).getTime(); 
+         const dateA = new Date(a.created_at).getTime();
+         const dateB = new Date(b.created_at).getTime();
          return dateB - dateA; // Descending order: latest created_at first
        });
 
@@ -95,7 +96,7 @@ export default function Page() {
       )
     );
 
-    fetch(`http://16.171.30.91:8000/posts/${id}`, {
+    fetch(`${API_URL}/posts/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

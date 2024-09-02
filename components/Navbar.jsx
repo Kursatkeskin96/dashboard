@@ -18,6 +18,9 @@ export default function Navbar() {
     <div className="w-full h-[60px] bg-[#0A0C2B] flex justify-center md:justify-end items-center gap-10 text-white md:pr-24">
       {isLoggedIn ? (
         <>
+          <Link href="/">
+            <div>Home</div>
+          </Link>
           <Link href="/form">
             <div>Form</div>
           </Link>
@@ -33,6 +36,9 @@ export default function Navbar() {
         </>
       ) : (
         <>
+          <Link href="/">
+            <div>Home</div>
+          </Link>
           <Link href="/register">
             <div>Sign Up</div>
           </Link>
