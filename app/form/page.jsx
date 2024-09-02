@@ -160,7 +160,8 @@ export default function Page() {
     };
 
     try {
-      const response = await fetch(`http://13.60.207.223:8000/posts`, {
+      const API_URL = '/api'
+      const response = await fetch(`${API_URL}/posts`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
