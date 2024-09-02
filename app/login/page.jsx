@@ -56,7 +56,7 @@ export default function Page() {
     if (validateEmail(email) && password.length >= 5) {
       try {
         const API_URL = "/api"
-        const response = await fetch(`${API_URL}/login`, {
+        const response = await fetch(`http://13.60.207.223:8000/login`, {
           method: "POST",
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
