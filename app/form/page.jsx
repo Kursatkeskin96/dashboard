@@ -183,7 +183,7 @@ export default function Page() {
   };
 
   return (
-    <div className="w-full flex justify-center items-center min-h-screen bg-[#F5F5F5]">
+    <div className="w-full flex justify-center items-center py-[100px] min-h-screen bg-[#F5F5F5]">
       <div className="w-[90%] md:w-[900px] h-auto md:h-[600px] mt-20 md:mt-0 rounded-[15px] bg-[#1E323D] flex flex-col md:flex-row justify-center items-center">
         {/* Image container */}
         <div className="w-full h-[300px] md:h-full md:w-1/2 relative">
