@@ -33,7 +33,7 @@ export default function Home() {
               project, including the technologies and tools used, the objectives
               behind its development, and a brief overview of its functionality
             </p>
-            <Link href="http://13.60.207.223:8000/docs">
+            <Link href="http://13.60.207.223:8000/docs" target="_blank">
               <button className="mt-10 md:mt-0 bg-gradient-to-r from-[#4F55B9] to-[#ADB1FF] text-white h-[40px] w-[200px] rounded-[12px]">
                 API DOCS
               </button>
