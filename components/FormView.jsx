@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React, { useRef } from "react";
-import safari from '@/utils/images/safari.png'
+import safari from '@/utils/images/Safari.png'
 import { motion, useInView } from "framer-motion";
 
 export default function FormView() {
