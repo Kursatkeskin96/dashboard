@@ -9,6 +9,7 @@ import Cards from "@/components/Cards";
 import FormView from "@/components/FormView";
 import Admin from "@/components/Admin";
 import { motion } from 'framer-motion'
+import Link from "next/link";
 
 export default function Home() {
   return (
