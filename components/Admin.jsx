@@ -30,7 +30,7 @@ export default function Admin() {
         <h2 className="text-3xl text-white font-bold">Admin Page</h2>
         <p className="text-[#d7d7d7] py-5">
           On the Admin page, you will see dynamic statistics that update in
-          real-time. If you submit a new form, you'll notice that the stats
+          real-time. If you submit a new form, you&apos;ll notice that the stats
           change accordingly. Another great feature is the ability to change the
           status of requests directly from this page.
         </p>
