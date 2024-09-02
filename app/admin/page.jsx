@@ -19,12 +19,10 @@ export default function Page() {
   const [currentPage, setCurrentPage] = useState(1);
   const recordsPerPage = 5; // Number of records to show per page
 
-  const API_URL = "/api"; // Use the proxy endpoint
 
  useEffect(() => {
    setLoading(true);
-    const API_URL = "/api";
-   fetch(`${API_URL}/posts`)
+   fetch(`http://13.60.207.223:8000/posts`)
      .then((response) => response.json())
      .then((data) => {
        const sortedData = data.sort((a, b) => {
@@ -89,14 +87,14 @@ export default function Page() {
   };
 
   const handleStatusChange = (id, newStatus, index) => {
-    const API_URL = "/api";
+
     setRequests((prevRequests) =>
       prevRequests.map((r, i) =>
         i === index ? { ...r, status: newStatus } : r
       )
     );
 
-    fetch(`${API_URL}/posts/${id}`, {
+    fetch(`http://13.60.207.223:8000/posts/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
