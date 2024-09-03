@@ -67,17 +67,17 @@ const [isMobile, setIsMobile] = useState(false);
         </Slider.Slide>
         <Slider.Slide>
           <div className="bg-white rounded-[50%] p-2 w-[50px] h-[50px] md:w-[60px] md:h-[60px] ">
-            <Image src={postgre} alt="alt" width={100} />
+            <Image src={postgre} alt="alt" width={100} height={100} />
           </div>
         </Slider.Slide>
         <Slider.Slide>
           <div className="bg-white rounded-[50%] p-2 w-[50px] h-[50px] md:w-[60px] md:h-[60px] ">
-            <Image src={aws} alt="alt" width={100} />
+            <Image src={aws} alt="alt" width={100} height={100} />
           </div>
         </Slider.Slide>
         <Slider.Slide>
           <div className="bg-white rounded-[50%] p-2 w-[50px] h-[50px] md:w-[60px] md:h-[60px] ">
-            <Image src={postman} alt="alt" width={100} />
+            <Image src={postman} alt="alt" width={100} height={100} />
           </div>
         </Slider.Slide>
         <Slider.Slide>
