@@ -142,7 +142,12 @@ export default function Page() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-20 items-center">
           {loading ? (
             <div className="w-full h-[150px] rounded-[20px] bg-custom-gradient gap-5 flex flex-col justify-center items-center">
-              <p className="text-[#6B6B6B]">Total Requests</p>
+              <div className="text-center">
+                <p className="text-[#6B6B6B]">Total Requests</p>
+                <p className="italic text-[8px] font-light text-gray-400">
+                  (Compared to last month)
+                </p>
+              </div>
               <div className="flex justify-center items-center gap-5">
                 <div className="h-full flex justify-center items-center w-1/2">
                   <div className="bg-white rounded-[100px] p-3">
@@ -164,7 +169,12 @@ export default function Page() {
             </div>
           ) : (
             <div className="w-full h-[150px] rounded-[20px] bg-custom-gradient gap-5 flex flex-col justify-center items-center">
-              <p className="text-[#6B6B6B]">Total Requests</p>
+              <div className="text-center">
+                <p className="text-[#6B6B6B]">Total Requests</p>
+                <p className="italic text-[8px] font-light text-gray-400">
+                  (Compared to last month)
+                </p>
+              </div>
               <div className="flex justify-center items-center gap-5">
                 <div className="h-full flex justify-center items-center w-1/2">
                   <div className="bg-white rounded-[100px] p-3">
@@ -195,7 +205,12 @@ export default function Page() {
           )}
           {loading ? (
             <div className="w-full h-[150px] rounded-[20px] bg-custom-gradient gap-5 flex flex-col justify-center items-center">
-              <p className="text-[#6B6B6B]">Total Accepted Requests</p>
+              <div className="text-center">
+                <p className="text-[#6B6B6B]">Total Accepted Requests</p>
+                <p className="italic text-[8px] font-light text-gray-400">
+                  (Compared to last month)
+                </p>
+              </div>
               <div className="flex justify-center items-center gap-5">
                 <div className="h-full flex justify-center items-center w-1/2">
                   <div className="bg-white rounded-[100px] p-3">
@@ -215,7 +230,12 @@ export default function Page() {
             </div>
           ) : (
             <div className="w-full h-[150px] rounded-[20px] bg-custom-gradient gap-5 flex flex-col justify-center items-center">
-              <p className="text-[#6B6B6B]">Total Accepted Requests</p>
+              <div className="text-center">
+                <p className="text-[#6B6B6B]">Total Accepted Requests</p>
+                <p className="italic text-[8px] font-light text-gray-400">
+                  (Compared to last month)
+                </p>
+              </div>
               <div className="flex justify-center items-center gap-5">
                 <div className="h-full flex justify-center items-center w-1/2">
                   <div className="bg-white rounded-[100px] p-3">
@@ -246,7 +266,12 @@ export default function Page() {
           )}
           {loading ? (
             <div className="w-full h-[150px] rounded-[20px] bg-custom-gradient gap-5 flex flex-col justify-center items-center">
-              <p className="text-[#6B6B6B]">Approval Rate</p>
+              <div className="text-center">
+                <p className="text-[#6B6B6B]">Approval Rate</p>
+                <p className="italic text-[8px] font-light text-gray-400">
+                  (Compared to last month)
+                </p>
+              </div>
               <div className="flex justify-center items-center gap-5">
                 <div className="h-full flex justify-center items-center w-1/2">
                   <div className="bg-white rounded-[100px] p-3">
@@ -266,7 +291,12 @@ export default function Page() {
             </div>
           ) : (
             <div className="w-full h-[150px] rounded-[20px] bg-custom-gradient gap-5 flex flex-col justify-center items-center">
-              <p className="text-[#6B6B6B]">Approval Rate</p>
+              <div className="text-center">
+                <p className="text-[#6B6B6B]">Approval Rate</p>
+                <p className="italic text-[8px] font-light text-gray-400">
+                  (Compared to last month)
+                </p>
+              </div>
               <div className="flex justify-center items-center gap-5">
                 <div className="h-full flex justify-center items-center w-1/2">
                   <div className="bg-white rounded-[100px] p-3">
@@ -302,7 +332,7 @@ export default function Page() {
         </div>
 
         {/* Second Full-Width Box */}
-        <div className="w-full h-auto mt-10 lg:mt-20 rounded-[20px] min-h-[600px] bg-custom-gradient flex flex-col justify-start items-center gap-5 p-8">
+        <div className="w-full h-auto mt-10 lg:mt-20 rounded-[20px] min-h-[550px] bg-custom-gradient flex flex-col justify-start items-center gap-5 p-8">
           {/* Table Heading */}
           {loading ? (
             // Show spinner or loading message when data is still loading
@@ -319,75 +349,78 @@ export default function Page() {
             </div>
           ) : (
             // Show content when loading is false
-            <div className="w-full">
-              <div className="hidden md:flex w-full justify-between items-center border-b-[1px] border-gray-300 pb-4 ">
-                <p className="w-[15%] text-gray-500 font-semibold">Full Name</p>
-                <p className="w-[10%] text-gray-500 font-semibold">
-                  Department
-                </p>
-                <p className=" text-gray-500 font-semibold">
-                  Conference Name
-                </p>
-                <p className="w-[30%] text-gray-500 font-semibold">
-                  Conference Details
-                </p>
-                <p className="w-[10%] text-gray-500 font-semibold">Date</p>
-                <p className="w-[10%] text-gray-500 font-semibold">Status</p>
+            <div className="w-full flex flex-col min-h-[500px] justify-between">
+              <div>
+                {/* Table Header */}
+                <div className="hidden md:flex w-full justify-between items-center border-b-[1px] border-gray-300 pb-4">
+                  <p className="w-[15%] text-gray-500 font-semibold">
+                    Full Name
+                  </p>
+                  <p className="w-[10%] text-gray-500 font-semibold">
+                    Department
+                  </p>
+                  <p className="text-gray-500 font-semibold">Conference Name</p>
+                  <p className="w-[30%] text-gray-500 font-semibold">
+                    Conference Details
+                  </p>
+                  <p className="w-[10%] text-gray-500 font-semibold">Date</p>
+                  <p className="w-[10%] text-gray-500 font-semibold">Status</p>
+                </div>
+
+                {/* Table Rows */}
+                {currentRequests.map((request, index) => (
+                  <div
+                    key={index}
+                    className="w-full flex flex-col md:flex-row justify-between items-start md:items-center py-4 border-b-[1px] border-gray-300 px-1 text-sm"
+                  >
+                    <div className="w-full md:w-[15%] mb-2 md:mb-0">
+                      <p className="text-gray-500 md:hidden">Full Name</p>
+                      <p className="text-black font-semibold">
+                        {request.firstname} {request.lastname}
+                      </p>
+                    </div>
+                    <div className="w-full md:w-[10%] mb-2 md:mb-0">
+                      <p className="text-gray-500 md:hidden">Department</p>
+                      <p className="text-black">Software</p>
+                    </div>
+                    <div className="w-full md:w-[15%] mb-2 md:mb-0">
+                      <p className="text-black">{request.conference_name}</p>
+                    </div>
+                    <div className="w-full md:w-[30%] mb-2 md:mb-0">
+                      <p className="text-gray-500 md:hidden">
+                        Conference Details
+                      </p>
+                      <p className="text-black">
+                        {request.conference_detail} /{" "}
+                        {request.conference_location}
+                      </p>
+                    </div>
+                    <div className="w-full md:w-[10%] mb-2 md:mb-0">
+                      <p className="text-gray-500 md:hidden">Date</p>
+                      <p className="text-black">{request.conference_date}</p>
+                    </div>
+                    <div className="w-full md:w-[10%] flex items-center gap-2">
+                      <p className="text-gray-500 md:hidden">Status</p>
+                      <select
+                        className={`px-3 py-1 rounded-full text-sm cursor-pointer ${getStatusClass(
+                          request.status
+                        )}`}
+                        value={request.status}
+                        onChange={(e) =>
+                          handleStatusChange(request.id, e.target.value, index)
+                        }
+                      >
+                        <option value="Pending">Pending</option>
+                        <option value="Approved">Approved</option>
+                        <option value="Rejected">Rejected</option>
+                      </select>
+                    </div>
+                  </div>
+                ))}
               </div>
 
-              {/* Table Rows */}
-              {currentRequests.map((request, index) => (
-                <div
-                  key={index}
-                  className="w-full flex flex-col md:flex-row justify-between items-start md:items-center py-4 border-b-[1px] border-gray-300 px-1"
-                >
-                  <div className="w-full md:w-[15%] mb-2 md:mb-0">
-                    <p className="text-gray-500 md:hidden">Full Name</p>
-                    <p className="text-black  font-semibold">
-                      {request.firstname} {request.lastname}
-                    </p>
-                  </div>
-                  <div className="w-full md:w-[10%] mb-2 md:mb-0">
-                    <p className="text-gray-500 md:hidden">Department</p>
-                    <p className="text-black">Software</p>
-                  </div>
-                  <div className="w-full md:w-[15%] mb-2 md:mb-0">
-                    <p className="text-black">{request.conference_name}</p>
-                  </div>
-                  <div className="w-full md:w-[30%] mb-2 md:mb-0">
-                    <p className="text-gray-500 md:hidden">
-                      Conference Details
-                    </p>
-                    <p className="text-black">
-                      {request.conference_detail} /{" "}
-                      {request.conference_location}
-                    </p>
-                  </div>
-                  <div className="w-full md:w-[10%] mb-2 md:mb-0">
-                    <p className="text-gray-500 md:hidden">Date</p>
-                    <p className="text-black">{request.conference_date}</p>
-                  </div>
-                  <div className="w-full md:w-[10%] flex items-center gap-2">
-                    <p className="text-gray-500 md:hidden">Status</p>
-                    <select
-                      className={`px-3 py-1 rounded-full text-sm cursor-pointer ${getStatusClass(
-                        request.status
-                      )}`}
-                      value={request.status}
-                      onChange={(e) =>
-                        handleStatusChange(request.id, e.target.value, index)
-                      }
-                    >
-                      <option value="Pending">Pending</option>
-                      <option value="Approved">Approved</option>
-                      <option value="Rejected">Rejected</option>
-                    </select>
-                  </div>
-                </div>
-              ))}
-
               {/* Pagination Controls */}
-              <div className="flex justify-center items-end h-full mt-4">
+              <div className="flex justify-center items-center mt-4">
                 {[...Array(Math.ceil(requests.length / recordsPerPage))].map(
                   (_, pageIndex) => (
                     <button
@@ -457,51 +490,53 @@ export default function Page() {
             )}
           </div>
 
-        {/* Second box takes the remaining 1 column */}
-<div className="w-full h-auto rounded-[20px] bg-custom-gradient p-1 2xl:p-6 flex flex-col justify-start" style={{ minHeight: "100%" }}>
-  {/* Header */}
-  <h2 className="text-2xl pl-[16px] font-bold text-black mb-6">
-    Most Attenders
-  </h2>
+          {/* Second box takes the remaining 1 column */}
+          <div
+            className="w-full h-auto rounded-[20px] bg-custom-gradient p-1 2xl:p-6 flex flex-col justify-start"
+            style={{ minHeight: "100%" }}
+          >
+            {/* Header */}
+            <h2 className="text-2xl pl-[16px] font-bold text-black mb-6">
+              Most Attenders
+            </h2>
 
-  {loading ? (
-    <div className="w-full overflow-x-auto flex justify-center items-center">
-      <BeatLoader
-        color="#0A0C2B"
-        loading={loading}
-        size={5}
-        aria-label="Loading Spinner"
-        data-testid="loader"
-      />
-    </div>
-  ) : (
-    <div className="w-full overflow-x-auto flex-grow">
-      <table className="w-full text-left">
-        {/* Table Heading */}
-        <thead>
-          <tr className="text-gray-500 text-sm border-b-[1px] border-gray-300">
-            <th className="py-3 px-4 w-2/3">Full Name</th>
-            <th className="py-3 px-4 w-1/3">Attendance</th>
-          </tr>
-        </thead>
-        <tbody>
-          {mostAttenders.map((attender, index) => (
-            <tr
-              key={index}
-              className="text-black border-b-[1px] border-gray-300 text-sm"
-            >
-              <td className="py-3 px-4">
-                {attender.firstname} {attender.lastname}
-              </td>
-              <td className="py-3 px-4">{attender.count}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  )}
-</div>
-
+            {loading ? (
+              <div className="w-full overflow-x-auto flex justify-center items-center">
+                <BeatLoader
+                  color="#0A0C2B"
+                  loading={loading}
+                  size={5}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                />
+              </div>
+            ) : (
+              <div className="w-full overflow-x-auto flex-grow">
+                <table className="w-full text-left">
+                  {/* Table Heading */}
+                  <thead>
+                    <tr className="text-gray-500 text-sm border-b-[1px] border-gray-300">
+                      <th className="py-3 px-4 w-2/3">Full Name</th>
+                      <th className="py-3 px-4 w-1/3">Attendance</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {mostAttenders.map((attender, index) => (
+                      <tr
+                        key={index}
+                        className="text-black border-b-[1px] border-gray-300 text-sm"
+                      >
+                        <td className="py-3 px-4">
+                          {attender.firstname} {attender.lastname}
+                        </td>
+                        <td className="py-3 px-4">{attender.count}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

@@ -19,9 +19,9 @@ export default function Home() {
         animate={{ opacity: 1, z: 0 }}
         transition={{ duration: 1, ease: "easeOut" }}
       >
-        <div className="flex justify-center gap-20 md:gap-0 lg:justify-between items-center w-full pt-32 flex-wrap ">
+        <div className="flex justify-center gap-20 md:gap-0 lg:justify-between items-center w-full pt-20 flex-wrap ">
           <div className="lg:max-w-[40%] w-full flex justify-center lg:items-start items-center flex-col">
-            <h1 className="text-3xl text-white font-bold fle text-center md:text-left">
+            <h1 className="text-3xl text-white font-bold fle text-center md:text-left leading-10">
               Welcome To My{" "}
               <span className="border-b-[6px] border-[#4F55B9]">
                 Full-Stack

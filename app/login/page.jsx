@@ -12,7 +12,7 @@ export default function Page() {
   const [showError, setShowError] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   const { login } = useContext(AuthContext);
 
@@ -55,7 +55,7 @@ export default function Page() {
 
     if (validateEmail(email) && password.length >= 5) {
       try {
-        const API_URL = '/api'
+        const API_URL = "/api";
         const response = await fetch(`${API_URL}/login`, {
           method: "POST",
           headers: {

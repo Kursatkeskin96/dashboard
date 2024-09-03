@@ -183,10 +183,10 @@ export default function Page() {
   };
 
   return (
-    <div className="w-full flex justify-center items-center py-[100px] min-h-screen bg-[#F5F5F5]">
-      <div className="w-[90%] md:w-[900px] h-auto md:h-[600px] mt-20 md:mt-0 rounded-[15px] bg-[#1E323D] flex flex-col md:flex-row justify-center items-center">
+    <div className="w-full flex justify-center items-center py-[50px] min-h-screen bg-[#F5F5F5]">
+      <div className="w-[95%] md:w-[900px] h-auto md:h-[600px] md:mt-0 rounded-[15px] bg-[#1E323D] flex flex-col md:flex-row justify-center items-center">
         {/* Image container */}
-        <div className="w-full h-[300px] md:h-full md:w-1/2 relative">
+        <div className="w-full h-[350px] md:h-full md:w-1/2 relative">
           <Image
             src={stars}
             alt="stars"
@@ -195,7 +195,7 @@ export default function Page() {
             priority
             
           />
-          <p className="absolute text-white text-center top-[50%] w-full opacity-75">
+          <p className="absolute text-white text-center top-[50%] px-5 md:px-0 w-full opacity-75">
             Expand Your Knowledge and Network Globally
           </p>
         </div>
