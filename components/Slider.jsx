@@ -9,6 +9,10 @@ import postgre from '@/utils/images/postgre.png'
 import postman from '@/utils/images/postman.png'
 import react from '@/utils/images/react.png'
 import tailwind from '@/utils/images/tailwind.png'
+import nextimg from '@/utils/images/nextjs.png'
+import python from '@/utils/images/python.png'
+import fastapi from '@/utils/images/fastapi.png'
+import jwt from '@/utils/images/jwt.png'
 import Image from 'next/image'
 
 export default function SliderComponent() {
@@ -26,12 +30,52 @@ export default function SliderComponent() {
       >
         <Slider.Slide>
           <div className="bg-white rounded-[50%] p-2 w-[50px] h-[50px] md:w-[60px] md:h-[60px] ">
+            <Image src={react} alt="alt" width={100} />
+          </div>
+        </Slider.Slide>
+        <Slider.Slide>
+          <div className="bg-white rounded-[50%] p-2 w-[50px] h-[50px] md:w-[60px] md:h-[60px] ">
+            <Image src={nextimg} alt="alt" width={100} />
+          </div>
+        </Slider.Slide>
+        <Slider.Slide>
+          <div className="bg-white rounded-[50%] p-2 w-[50px] h-[50px] md:w-[60px] md:h-[60px] ">
+            <Image src={python} alt="alt" width={100} />
+          </div>
+        </Slider.Slide>
+        <Slider.Slide>
+          <div className="bg-white rounded-[50%] p-2 w-[50px] h-[50px] md:w-[60px] md:h-[60px] ">
+            <Image src={fastapi} alt="alt" width={100} />
+          </div>
+        </Slider.Slide>
+        <Slider.Slide>
+          <div className="bg-white rounded-[50%] p-2 w-[50px] h-[50px] md:w-[60px] md:h-[60px] ">
+            <Image src={postgre} alt="alt" width={100} />
+          </div>
+        </Slider.Slide>
+        <Slider.Slide>
+          <div className="bg-white rounded-[50%] p-2 w-[50px] h-[50px] md:w-[60px] md:h-[60px] ">
             <Image src={aws} alt="alt" width={100} />
           </div>
         </Slider.Slide>
         <Slider.Slide>
           <div className="bg-white rounded-[50%] p-2 w-[50px] h-[50px] md:w-[60px] md:h-[60px] ">
+            <Image src={postman} alt="alt" width={100} />
+          </div>
+        </Slider.Slide>
+        <Slider.Slide>
+          <div className="bg-white rounded-[50%] p-2 w-[50px] h-[50px] md:w-[60px] md:h-[60px] ">
             <Image src={figma} alt="alt" width={100} />
+          </div>
+        </Slider.Slide>
+        <Slider.Slide>
+          <div className="bg-white rounded-[50%] p-2 w-[50px] h-[50px] md:w-[60px] md:h-[60px] ">
+            <Image src={tailwind} alt="alt" width={100} />
+          </div>
+        </Slider.Slide>
+        <Slider.Slide>
+          <div className="bg-white rounded-[50%] p-2 w-[50px] h-[50px] md:w-[60px] md:h-[60px] ">
+            <Image src={jwt} alt="alt" width={100} />
           </div>
         </Slider.Slide>
         <Slider.Slide>
@@ -42,26 +86,6 @@ export default function SliderComponent() {
         <Slider.Slide>
           <div className="bg-white rounded-[50%] p-2 w-[50px] h-[50px] md:w-[60px] md:h-[60px] ">
             <Image src={github1} alt="alt" width={100} />
-          </div>
-        </Slider.Slide>
-        <Slider.Slide>
-          <div className="bg-white rounded-[50%] p-2 w-[50px] h-[50px] md:w-[60px] md:h-[60px] ">
-            <Image src={postgre} alt="alt" width={100} />
-          </div>
-        </Slider.Slide>
-        <Slider.Slide>
-          <div className="bg-white rounded-[50%] p-2 w-[50px] h-[50px] md:w-[60px] md:h-[60px] ">
-            <Image src={postman} alt="alt" width={100} />
-          </div>
-        </Slider.Slide>
-        <Slider.Slide>
-          <div className="bg-white rounded-[50%] p-2 w-[50px] h-[50px] md:w-[60px] md:h-[60px] ">
-            <Image src={react} alt="alt" width={100} />
-          </div>
-        </Slider.Slide>
-        <Slider.Slide>
-          <div className="bg-white rounded-[50%] p-2 w-[50px] h-[50px] md:w-[60px] md:h-[60px] ">
-            <Image src={tailwind} alt="alt" width={100} />
           </div>
         </Slider.Slide>
       </Slider>
