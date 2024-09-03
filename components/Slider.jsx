@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Slider from 'react-infinite-logo-slider'
 import aws from '@/utils/images/amazonwebservices.svg'
 import figma from '@/utils/images/figma.png'
@@ -16,30 +16,14 @@ import jwt from '@/utils/images/jwt.png'
 import Image from 'next/image'
 
 export default function SliderComponent() {
-const [isMobile, setIsMobile] = useState(false);
 
-
-  useEffect(() => {
-    // This will only run on the client side
-    const checkIsMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    checkIsMobile(); // Check on mount
-
-    window.addEventListener("resize", checkIsMobile); // Update on resize
-
-    return () => {
-      window.removeEventListener("resize", checkIsMobile); // Clean up the event listener
-    };
-  }, []);
   return (
     <div className="max-w-[100%]">
       <h3 className="text-3xl text-transparent bg-clip-text bg-gradient-to-t from-[#4F55B9] to-[#ADB1FF] font-bold text-center mb-10 w-fit mx-auto">
         Technologies Used
       </h3>
       <Slider
-        width={isMobile ? "120px" : "220px"}
+        width={"220px"}
         duration={30}
         pauseOnHover={false}
         blurBorders={true}
@@ -67,17 +51,17 @@ const [isMobile, setIsMobile] = useState(false);
         </Slider.Slide>
         <Slider.Slide>
           <div className="bg-white rounded-[50%] p-2 w-[50px] h-[50px] md:w-[60px] md:h-[60px] ">
-            <Image src={postgre} alt="alt" width={100} height={100} />
+            <Image src={postgre} alt="alt" width={100} />
           </div>
         </Slider.Slide>
         <Slider.Slide>
           <div className="bg-white rounded-[50%] p-2 w-[50px] h-[50px] md:w-[60px] md:h-[60px] ">
-            <Image src={aws} alt="alt" width={100} height={100} />
+            <Image src={aws} alt="alt" width={100} />
           </div>
         </Slider.Slide>
         <Slider.Slide>
           <div className="bg-white rounded-[50%] p-2 w-[50px] h-[50px] md:w-[60px] md:h-[60px] ">
-            <Image src={postman} alt="alt" width={100} height={100} />
+            <Image src={postman} alt="alt" width={100} />
           </div>
         </Slider.Slide>
         <Slider.Slide>
