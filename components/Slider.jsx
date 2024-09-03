@@ -16,13 +16,15 @@ import jwt from '@/utils/images/jwt.png'
 import Image from 'next/image'
 
 export default function SliderComponent() {
+
+  const isMobile = window.innerWidth < 768;
   return (
     <div className="max-w-[100%]">
       <h3 className="text-3xl text-transparent bg-clip-text bg-gradient-to-t from-[#4F55B9] to-[#ADB1FF] font-bold text-center mb-10 w-fit mx-auto">
         Technologies Used
       </h3>
       <Slider
-        width="220px"
+        width={isMobile ? "120px" : "220px"}
         duration={30}
         pauseOnHover={false}
         blurBorders={true}
