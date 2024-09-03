@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useEffect, useState } from "react";
 import Slider from 'react-infinite-logo-slider'
 import aws from '@/utils/images/amazonwebservices.svg'
 import figma from '@/utils/images/figma.png'
@@ -16,8 +16,23 @@ import jwt from '@/utils/images/jwt.png'
 import Image from 'next/image'
 
 export default function SliderComponent() {
+const [isMobile, setIsMobile] = useState(false);
 
-  const isMobile = window.innerWidth < 768;
+
+  useEffect(() => {
+    // This will only run on the client side
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkIsMobile(); // Check on mount
+
+    window.addEventListener("resize", checkIsMobile); // Update on resize
+
+    return () => {
+      window.removeEventListener("resize", checkIsMobile); // Clean up the event listener
+    };
+  }, []);
   return (
     <div className="max-w-[100%]">
       <h3 className="text-3xl text-transparent bg-clip-text bg-gradient-to-t from-[#4F55B9] to-[#ADB1FF] font-bold text-center mb-10 w-fit mx-auto">
