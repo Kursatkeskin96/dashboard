@@ -22,10 +22,11 @@ export default function Page() {
 
  useEffect(() => {
    setLoading(true);
-   const API_URL = '/api'
+   const API_URL = "/api";
    fetch(`${API_URL}/posts`)
      .then((response) => response.json())
      .then((data) => {
+       // Sort by created_at date
        const sortedData = data.sort((a, b) => {
          const dateA = new Date(a.created_at).getTime();
          const dateB = new Date(b.created_at).getTime();
@@ -472,18 +473,26 @@ export default function Page() {
                     </tr>
                   </thead>
                   <tbody>
-                    {upcomingEvents.map((request, index) => (
-                      <tr
-                        key={index}
-                        className="text-black border-b-[1px] border-gray-300 text-sm"
-                      >
-                        <td className="py-3 px-4">{request.conference_name}</td>
-                        <td className="py-3 px-4">
-                          {request.conference_location}
-                        </td>
-                        <td className="py-3 px-4">{request.conference_date}</td>
-                      </tr>
-                    ))}
+                    {/* Sort by date and display the closest 3 events */}
+                    {requests
+                      .sort((a, b) => {
+                        const dateA = new Date(a.conference_date).getTime();
+                        const dateB = new Date(b.conference_date).getTime();
+                        return dateA - dateB; // Ascending order: closest first
+                      })
+                      .slice(0, 3) // Only show the first 3 closest events
+                      .map((event, index) => (
+                        <tr
+                          key={index}
+                          className="text-black border-b-[1px] border-gray-300 text-sm"
+                        >
+                          <td className="py-3 px-4">{event.conference_name}</td>
+                          <td className="py-3 px-4">
+                            {event.conference_location}
+                          </td>
+                          <td className="py-3 px-4">{event.conference_date}</td>
+                        </tr>
+                      ))}
                   </tbody>
                 </table>
               </div>
