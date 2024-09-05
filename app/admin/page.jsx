@@ -475,6 +475,9 @@ export default function Page() {
                   <tbody>
                     {/* Sort by date and display the closest 3 events */}
                     {requests
+                      .filter(
+                        (event) => new Date(event.conference_date) >= new Date()
+                      ) // Filter to show only future events
                       .sort((a, b) => {
                         const dateA = new Date(a.conference_date).getTime();
                         const dateB = new Date(b.conference_date).getTime();
